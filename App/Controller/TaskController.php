@@ -35,7 +35,7 @@ class TaskController
 
         $task = new Task;
 
-        $needPage = empty((int)$_GET['page']) ? 1 : (int)$_GET['page'];
+        $needPage = empty($_GET['page']) ? 1 : (int)$_GET['page'];
         $count = $task->getCount();
         $pagesCount = ceil($count / $this->perPage);
 

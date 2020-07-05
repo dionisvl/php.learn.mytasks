@@ -2,30 +2,9 @@
 
 //константы для подключения к базе данных
 
-const DB_HOST =  '127.0.0.1';
-const DB_USER =  'root';
-const DB_PASSWORD =  'root';
-const DB_DATABASE =  'denisiris';
+const DB_HOST = '';
+const DB_USER = 'sa.';
+const DB_PASSWORD = 'sa.';
+const DB_DATABASE = 'sa.';
 
-const DB_SALT =  '123sdfsdf';
-
-
-///////////////параметры пагинации для модуля navigator///////
-$page = 1; //номер страницы которую нужно открыть
-
-//если был произведен запрос другой страницы, то присваиваем переменной новый индекс
-if ($_GET["page"]) {
-    $page = (int)$_GET["page"];
-}
-
-// параметры подключения для процедуры пагинации
-$paginateParams = [
-        'countRecordOnPage' => 3,//количество выводимых записей
-        'numberPage' => $page,//номер запрашиваемой страницы
-        'paramName' => "page",//название параметры в GET запросе
-        'linkCount' => 3,    //количество страниц в списе
-        'viewAll' => false //показать все записи на одной странице
-];
-////////////////////////////////
-
-?>
+const DB_SALT = '123sdfsdf';
