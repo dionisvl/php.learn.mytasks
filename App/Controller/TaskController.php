@@ -35,14 +35,14 @@ class TaskController
 
         $task = new Task;
 
-        $needPage = empty($_GET['page']) ? 1 : (int)$_GET['page'];
+        $requestedPage = empty($_GET['page']) ? 1 : (int)$_GET['page'];
         $count = $task->getCount();
         $pagesCount = ceil($count / $this->perPage);
 
-        $tasks = $task->getAll($orderBy, $orderDirection, $this->perPage, $needPage);
+        $tasks = $task->getAll($orderBy, $orderDirection, $this->perPage, $requestedPage);
         $page = includeTemplate('views/task/index.php', [
             'tasks' => $tasks,
-            'curPage' => $needPage,
+            'curPage' => $requestedPage,
             'pagesCount' => $pagesCount
         ]);
         $layout = includeTemplate('views/layout.php', [
