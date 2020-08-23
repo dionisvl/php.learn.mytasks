@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Helpers\Auth;
+use App\Helpers\Db;
 use App\Helpers\Validator;
 use App\Model\Task;
 
@@ -20,7 +21,8 @@ class TaskController
                 $orderDirection = $_SESSION['orderDirection'];
             }
         } else {
-            $_SESSION['orderDirection'] = $orderDirection = mb_strimwidth($_GET['orderDirection'], 0, 10);
+            $link = Db::getLink();
+            $_SESSION['orderDirection'] = $orderDirection = $link->real_escape_string(mb_strimwidth($_GET['orderDirection'], 0, 10));
         }
 
         if (empty(mb_strimwidth($_GET['orderBy'], 0, 20))) {
@@ -30,7 +32,8 @@ class TaskController
                 $orderBy = $_SESSION['orderBy'];
             }
         } else {
-            $_SESSION['orderBy'] = $orderBy = mb_strimwidth($_GET['orderBy'], 0, 20);
+            $link = Db::getLink();
+            $_SESSION['orderBy'] = $orderBy = $link->real_escape_string(mb_strimwidth($_GET['orderBy'], 0, 20));
         }
 
         $task = new Task;
