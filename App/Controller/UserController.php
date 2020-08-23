@@ -18,6 +18,7 @@ class UserController
         $page = includeTemplate('views/registration.php', []);
 
         $layout = includeTemplate('views/layout.php', [
+                'header' => 'Регистрация',
                 'page' => $page
             ]
         );
@@ -44,6 +45,7 @@ class UserController
             $layout = includeTemplate('views/layout.php', [
                     'error' => 1,
                     'errorMessage' => $errorMessage,
+                    'header' => 'Регистрация',
                     'page' => $page
                 ]
             );
@@ -76,6 +78,7 @@ class UserController
     public function loginForm(){
         $page = includeTemplate('views/login.php', []);
         $layout = includeTemplate('views/layout.php', [
+                'header' => "Вход",
                 'page' => $page
             ]
         );

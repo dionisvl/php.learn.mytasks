@@ -63,7 +63,14 @@ if (!empty($message)) { ?>
 
     <div class="row">
         <div class="col-md-12">
-            <?= $page ?>
+            <div class="page-header">
+                <h1><?= $header ?></h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $page ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

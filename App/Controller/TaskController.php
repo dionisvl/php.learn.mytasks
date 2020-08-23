@@ -46,6 +46,7 @@ class TaskController
             'pagesCount' => $pagesCount
         ]);
         $layout = includeTemplate('views/layout.php', [
+            'header' => "Список задач",
             'page' => $page
         ]);
         print($layout);
@@ -55,6 +56,7 @@ class TaskController
     {
         $page = includeTemplate('views/task/create.php', []);
         $layout = includeTemplate('views/layout.php', [
+                'header' => "Создание задачи",
                 'page' => $page
             ]
         );
@@ -66,6 +68,7 @@ class TaskController
         $task = (new Task)->getById($id);
         $page = includeTemplate('views/task/show.php', ['task' => $task]);
         $layout = includeTemplate('views/layout.php', [
+                'header' => "Просмотр задачи №<?= $task[id] ?>",
                 'page' => $page
             ]
         );
@@ -89,6 +92,7 @@ class TaskController
         if ($errorMessage) {
             $page = includeTemplate('views/task/create.php', []);
             $layout = includeTemplate('views/layout.php', [
+                    'header' => 'Создание новой задачи',
                     'errorMessage' => $errorMessage,
                     'page' => $page
                 ]
@@ -106,6 +110,7 @@ class TaskController
         $createdTask = Task::getById($taskId);
         $page = includeTemplate('views/task/show.php', ['task' => $createdTask]);
         $layout = includeTemplate('views/layout.php', [
+                'header' => 'Создание новой задачи',
                 'message' => 'Задача #' . $taskId . ' успешно создана',
                 'page' => $page
             ]
@@ -146,6 +151,7 @@ class TaskController
 
             $page = includeTemplate('views/task/edit.php', ['task' => $task]);
             $layout = includeTemplate('views/layout.php', [
+                    'header' => "Изменение задачи #$task[id]",
                     'errorMessage' => $errorMessage,
                     'page' => $page
                 ]
@@ -171,6 +177,7 @@ class TaskController
         $page = includeTemplate('views/task/edit.php', ['task' => $task]);
         $layout = includeTemplate('views/layout.php', [
                 'message' => 'Задача #' . $id . ' успешно изменена',
+                'header' => "Изменение задачи #$task[id]",
                 'page' => $page
             ]
         );
