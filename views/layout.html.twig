@@ -14,18 +14,17 @@
 </head>
 <body>
 
-<?
-if (!empty($message)) { ?>
+{% if message is not empty %}
     <div class="alert alert-success" role="alert">
-        <?= $message ?>
+        {{ message }}
     </div>
-<? } ?>
+{% endif %}
 
-<? if (!empty($errorMessage)) { ?>
+{% if errorMessage is not empty %}
     <div class="alert alert-danger" role="alert">
-        <?= $errorMessage ?>
+        {{ errorMessage }}
     </div>
-<? } ?>
+{% endif %}
 
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,23 +39,21 @@ if (!empty($message)) { ?>
 
             </ul>
             <ul class="navbar-nav ml-md-auto">
-
                 <li class="nav-item ">
                     <a class="nav-link" href="/task/create">Создать новую задачу</a>
                 </li>
-
-                <? if (isAuth()) { ?>
+                {% if session.user.is_admin %}
                     <li class="nav-item ">
                         <a class="nav-link" href="/logout">Выход из профиля админа</a>
                     </li>
-                <? } else { ?>
+                {% else %}
                     <li class="nav-item ">
                         <a class="nav-link" href="/login">Вход</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/registration">Регистрация</a>
                     </li>
-                <? } ?>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -64,11 +61,11 @@ if (!empty($message)) { ?>
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1><?= $header ?></h1>
+                <h1>{{ header }}</h1>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= $page ?>
+                    {% block content %}{% endblock %}
                 </div>
             </div>
         </div>

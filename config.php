@@ -2,9 +2,11 @@
 
 //константы для подключения к базе данных
 
-const DB_HOST = '';
-const DB_USER = 'sa.';
-const DB_PASSWORD = 'sa.';
-const DB_DATABASE = 'sa.';
+const DB_HOST = '127.0.0.1';
+const DB_USER = 'root';
+const DB_PASSWORD = 'root';
+const DB_DATABASE = 'beejee';
 
 const DB_SALT = '123sdfsdf';
+
+define('PATH_ROOT', __DIR__);

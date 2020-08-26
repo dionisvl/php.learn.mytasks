@@ -11,7 +11,6 @@ class Db
         if ($link == false) {
             dd('Ошибка подключения: ' . mysqli_connect_error());
         } else {
-            //dd ('Подключились успешно к БД');
             return $link;
         }
     }

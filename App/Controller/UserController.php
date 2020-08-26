@@ -7,7 +7,7 @@ use App\Helpers\Validator;
 use App\Model\User;
 use Exception;
 
-class UserController
+class UserController extends BaseController
 {
     /**
      * Show the form for creating a new resource.
@@ -15,15 +15,9 @@ class UserController
      */
     public function create()
     {
-        $page = includeTemplate('views/registration.php', []);
-
-        $layout = includeTemplate('views/layout.php', [
-                'header' => 'Регистрация',
-                'page' => $page
-            ]
-        );
-
-        print($layout);
+        $this->print('/registration.html.twig', [
+            'header' => 'Регистрация',
+        ]);
     }
 
     public function store()
@@ -41,15 +35,12 @@ class UserController
         }
 
         if ($errorMessage) {
-            $page = includeTemplate('views/registration.php', []);
-            $layout = includeTemplate('views/layout.php', [
-                    'error' => 1,
-                    'errorMessage' => $errorMessage,
-                    'header' => 'Регистрация',
-                    'page' => $page
-                ]
-            );
-            print($layout);
+            $this->print('/registration.html.twig', [
+                'error' => 1,
+                'errorMessage' => $errorMessage,
+                'header' => 'Регистрация',
+            ]);
+
             return false;
         }
 
@@ -61,28 +52,23 @@ class UserController
             $userId = $user->create($name, $password, $email);
             $user = $this::getById($userId);
             Auth::authorize($user);
-            $page = includeTemplate('views/registration.php', []);
-            $layout = includeTemplate('views/layout.php', [
-                    'message' => "Пользователь $user[name] успешно зарегистрирован",
-                    'page' => $page,
-                    'user' => $user
-                ]
-            );
-            print($layout);
+            $this->print('/registration.html.twig', [
+                'message' => "Пользователь $user[name] успешно зарегистрирован",
+                'user' => $user,
+                'header' => 'Регистрация',
+            ]);
+
             return false;
         } catch (Exception $e) {
             dd($e);
         }
     }
 
-    public function loginForm(){
-        $page = includeTemplate('views/login.php', []);
-        $layout = includeTemplate('views/layout.php', [
-                'header' => "Вход",
-                'page' => $page
-            ]
-        );
-        print($layout);
+    public function loginForm()
+    {
+        $this->print('/login.html.twig', [
+            'header' => "Вход"
+        ]);
         return false;
     }
 
@@ -91,7 +77,8 @@ class UserController
         return User::getById($userId)[0];
     }
 
-    public function getByName(string $name){
+    public function getByName(string $name)
+    {
         return User::getByName($name);
     }
 }

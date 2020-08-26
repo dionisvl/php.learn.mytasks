@@ -8,7 +8,7 @@ use App\Helpers\Db;
 use App\Helpers\Validator;
 use App\Model\Task;
 
-class TaskController
+class TaskController extends BaseController
 {
     private $perPage = 3;
 
@@ -43,39 +43,29 @@ class TaskController
         $pagesCount = ceil($count / $this->perPage);
 
         $tasks = $task->getAll($orderBy, $orderDirection, $this->perPage, $requestedPage);
-        $page = includeTemplate('views/task/index.php', [
+
+        $this->print('/task/index.html.twig', [
             'tasks' => $tasks,
             'curPage' => $requestedPage,
-            'pagesCount' => $pagesCount
+            'pagesCount' => $pagesCount,
+            'header' => "Список задач"
         ]);
-        $layout = includeTemplate('views/layout.php', [
-            'header' => "Список задач",
-            'page' => $page
-        ]);
-        print($layout);
     }
 
     public function create()
     {
-        $page = includeTemplate('views/task/create.php', []);
-        $layout = includeTemplate('views/layout.php', [
-                'header' => "Создание задачи",
-                'page' => $page
-            ]
-        );
-        print($layout);
+        $this->print('/task/create.html.twig', [
+            'header' => "Создание задачи"
+        ]);
     }
 
     public function show(int $id)
     {
         $task = (new Task)->getById($id);
-        $page = includeTemplate('views/task/show.php', ['task' => $task]);
-        $layout = includeTemplate('views/layout.php', [
-                'header' => "Просмотр задачи №<?= $task[id] ?>",
-                'page' => $page
-            ]
-        );
-        print($layout);
+        $this->print('/task/show.html.twig', [
+            'task' => $task,
+            'header' => "Просмотр задачи № $task[id] ",
+        ]);
     }
 
     public function store()
@@ -93,14 +83,10 @@ class TaskController
         }
 
         if ($errorMessage) {
-            $page = includeTemplate('views/task/create.php', []);
-            $layout = includeTemplate('views/layout.php', [
-                    'header' => 'Создание новой задачи',
-                    'errorMessage' => $errorMessage,
-                    'page' => $page
-                ]
-            );
-            print($layout);
+            $this->print('/task/create.html.twig', [
+                'header' => 'Создание новой задачи',
+                'errorMessage' => $errorMessage,
+            ]);
             return false;
         }
 
@@ -111,15 +97,12 @@ class TaskController
         $taskId = $task->create($name, $email, $text, 'NEW');
 
         $createdTask = Task::getById($taskId);
-        $page = includeTemplate('views/task/show.php', ['task' => $createdTask]);
-        $layout = includeTemplate('views/layout.php', [
-                'header' => 'Создание новой задачи',
-                'message' => 'Задача #' . $taskId . ' успешно создана',
-                'page' => $page
-            ]
-        );
 
-        print($layout);
+        $this->print('/task/show.html.twig', [
+            'task' => $createdTask,
+            'header' => 'Создание новой задачи',
+            'message' => 'Задача #' . $taskId . ' успешно создана',
+        ]);
     }
 
     public function edit(int $id)
@@ -127,9 +110,11 @@ class TaskController
         Auth::denyIfNotAuth();
 
         $task = (new Task)->getById($id);
-        $page = includeTemplate('views/task/edit.php', ['task' => $task]);
-        $layout = includeTemplate('views/layout.php', ['page' => $page]);
-        print($layout);
+
+        $this->print('/task/edit.html.twig', [
+            'task' => $task,
+            'header' => 'Изменение задачи'
+        ]);
     }
 
     public function update(int $id)
@@ -151,15 +136,11 @@ class TaskController
         $task = (new Task)->getById($id);
 
         if ($errorMessage) {
-
-            $page = includeTemplate('views/task/edit.php', ['task' => $task]);
-            $layout = includeTemplate('views/layout.php', [
-                    'header' => "Изменение задачи #$task[id]",
-                    'errorMessage' => $errorMessage,
-                    'page' => $page
-                ]
-            );
-            print($layout);
+            $this->print('/task/edit.html.twig', [
+                'task' => $task,
+                'header' => "Изменение задачи #$task[id]",
+                'errorMessage' => $errorMessage,
+            ]);
             return false;
         }
 
@@ -169,7 +150,6 @@ class TaskController
             $edited = true;
         }
         $name = htmlspecialchars($_POST['name']);
-
         $status = htmlspecialchars($_POST['status']);
 
         $task = new Task;
@@ -177,14 +157,11 @@ class TaskController
 
         $task = (new Task)->getById($id);
 
-        $page = includeTemplate('views/task/edit.php', ['task' => $task]);
-        $layout = includeTemplate('views/layout.php', [
-                'message' => 'Задача #' . $id . ' успешно изменена',
-                'header' => "Изменение задачи #$task[id]",
-                'page' => $page
-            ]
-        );
-        print($layout);
+        $this->print('/task/edit.html.twig', [
+            'task' => $task,
+            'message' => 'Задача #' . $id . ' успешно изменена',
+            'header' => "Изменение задачи #$task[id]"
+        ]);
     }
 
     private function getStatus(string $status): string

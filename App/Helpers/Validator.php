@@ -9,7 +9,6 @@ class Validator
     public static function validate(array $fields, array $needFields): array
     {
         $emptyFields = [];
-//        dd($fields);
 
         foreach ($needFields as $key => $needField){
 
