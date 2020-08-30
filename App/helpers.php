@@ -39,21 +39,6 @@ function handleController(string $controller, string $method, ?array $vars)
     $object->{$method}(...$values);
 }
 
-/**
- * Вставляем в шаблон переменные и возвращаем
- * @param string $template
- * @param array|null $params
- * @return false|string
- */
-function includeTemplate(string $template, ?array $params)
-{
-    ob_start();
-    extract($params);
-    include($template);
-    return ob_get_clean();
-
-}
-
 function isAuth(){
     return Auth::isAuth();
 }
