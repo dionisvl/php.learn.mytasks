@@ -5,15 +5,8 @@ namespace App\Model;
 use App\Helpers\Db;
 use Exception;
 
-class Task
+class Task extends BaseModel
 {
-    private $link;
-
-    public function __construct()
-    {
-        $this->link = Db::getLink();
-    }
-
     public function create(string $name, string $email, string $text, string $status)
     {
         $query = 'INSERT INTO tasks(name, email, text, status) VALUES(?,?,?,?)';
