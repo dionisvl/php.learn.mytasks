@@ -25,7 +25,6 @@ class Auth
         return $_SESSION["user"]['id'] ?? false;
     }
 
-
     public static function login()
     {
         $errorMessage = '';
@@ -33,7 +32,7 @@ class Auth
         $name = $_POST['name'];
         $saltedPass = hash('SHA3-512', $_POST['password'] . DB_SALT);
 
-        $user = (new \App\Controller\UserController)->getByName($name);
+        $user = (new UserController)->getByName($name);
 
         if (empty($user['id'])) {
             $errorMessage = 'пользователь не найден';
@@ -45,15 +44,6 @@ class Auth
                 $errorMessage = 'Неверный пароль';
             }
         }
-
-//        $page = includeTemplate('views/login.php', []);
-//        $layout = includeTemplate('views/layout.php', [
-//                'errorMessage' => $errorMessage,
-//                'message' => $message,
-//                'page' => $page
-//            ]
-//        );
-//        print($layout);
 
         $baseController = new BaseController();
         $baseController->print('/login.html.twig', [
@@ -79,15 +69,6 @@ class Auth
                 'errorMessage' => 'Пользователь не авторизован',
                 'header' => "Список задач"
             ]);
-
-//            $tasks = (new Task)->getAll('name', 'ASC');
-//            $page = includeTemplate('views/task/index.php', ['tasks' => $tasks]);
-//            $layout = includeTemplate('views/layout.php', [
-//                    'errorMessage' => 'Пользователь не авторизован',
-//                    'page' => $page
-//                ]
-//            );
-//            print($layout);
             die();
         }
     }

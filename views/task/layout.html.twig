@@ -8,9 +8,9 @@
     <title>Bootstrap 4, from LayoutIt!</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- font-awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
 </head>
 <body>
 
@@ -28,16 +28,12 @@
 
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/">MyTasks</a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="navbar-nav">
-
-            </ul>
             <ul class="navbar-nav ml-md-auto">
                 <li class="nav-item ">
                     <a class="nav-link" href="/task/create">Создать новую задачу</a>
@@ -64,14 +60,12 @@
                 <h1>{{ header }}</h1>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    {% block content %}{% endblock %}
-                </div>
+                {% block content %}{% endblock %}
             </div>
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/brands.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
 </body>
 </html>

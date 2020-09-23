@@ -19,7 +19,7 @@ class BaseController
         $this->twig->addGlobal('session', $_SESSION);
     }
 
-    public function print(string $templateName = 'task/create.html.twig', array $context = [])
+    public function print(string $templateName, array $context = [])
     {
         $template = $this->twig->load($templateName);
         echo $template->render($context);

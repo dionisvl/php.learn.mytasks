@@ -153,7 +153,7 @@ class TaskController extends BaseController
         $status = htmlspecialchars($_POST['status']);
 
         $task = new Task;
-        $result = $task->update($name, $email, $text, $status, $edited, $id);
+        $task->update($name, $email, $text, $status, $edited, $id);
 
         $task = (new Task)->getById($id);
 

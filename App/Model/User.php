@@ -6,15 +6,8 @@ namespace App\Model;
 use App\Helpers\Db;
 use Exception;
 
-class User
+class User extends BaseModel
 {
-    private $link;
-
-    public function __construct()
-    {
-        $this->link = Db::getLink();
-    }
-
     public function create(string $name, string $password, string $email)
     {
         $query = 'INSERT INTO users(name, password, email) VALUES(?,?,?)';
