@@ -1,0 +1,15 @@
+{% extends "/home/layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-12">
+        {% if posts is empty %}
+            <div>Статей не обнаружено</div>
+        {% else %}
+            {% for post in posts %}
+                <div>{{ post['title'] }}</div>
+                <div>{{ post['preview_text'] }}</div>
+                <div><a href="/post/{{ post['id'] }}/edit"><i class="fas fa-pencil-alt"></i></a></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

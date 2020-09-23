@@ -1,4 +1,5 @@
 <?php
+use App\Controller\HomeController;
 use App\Controller\TaskController;
 use App\Controller\UserController;
 use App\Helpers\Auth;
@@ -6,7 +7,7 @@ use App\Helpers\Auth;
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     //main page
-    $r->addRoute('GET', '/', [TaskController::class, 'index']);
+    $r->addRoute('GET', '/', [HomeController::class, 'index']);
 
     $r->addRoute('GET', '/registration', [UserController::class, 'create']);
     $r->addRoute('POST', '/registration', [UserController::class, 'store']);
@@ -16,10 +17,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
     $r->addRoute('GET', '/logout', [Auth::class, 'logout']);
 
-
+    $r->addRoute('GET', '/task', [TaskController::class, 'index']);
     $r->addRoute('GET', '/task/create', [TaskController::class, 'create']);
     $r->addRoute('POST', '/task/create', [TaskController::class, 'store']);
-
 
     // {id} must be a number (\d+)
     $r->addRoute('GET', '/task/{id:\d+}', [TaskController::class, 'show']);
