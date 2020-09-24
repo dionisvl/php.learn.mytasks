@@ -9,6 +9,7 @@
  
  ### Установка:
  - composer install
+ - cp config.example.php config.php
  - Создать пустую БД
  - внести реквизиты доступа к БД в файл config.php
  - Выполнить SQL миграции из файла schema.sql
