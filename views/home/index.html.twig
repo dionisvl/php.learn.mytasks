@@ -2,14 +2,47 @@
 
 {% block content %}
     <div class="col-md-12">
-        {% if posts is empty %}
-            <div>Статей не обнаружено</div>
+        {% if categories is empty %}
+            <h3>Категорий не обнаружено</h3>
         {% else %}
-            {% for post in posts %}
-                <div>{{ post['title'] }}</div>
-                <div>{{ post['preview_text'] }}</div>
-                <div><a href="/post/{{ post['id'] }}/edit"><i class="fas fa-pencil-alt"></i></a></div>
+            <h2>Список категорий:</h2>
+            {% for category in categories %}
+                <div>
+                    <span>
+                        <a href="/category/{{ category['slug'] }}">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                    {{ category['title'] }}
+                </div>
             {% endfor %}
+        {% endif %}
+
+        {% if posts is empty %}
+            <h3>Статей не обнаружено</h3>
+        {% else %}
+            <h2>Список статей:</h2>
+            <div style="display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;">
+                {% for post in posts %}
+                    <div class="card" style="width: 18rem;">
+                        {% if post['preview_picture'] is not empty %}
+                            <img src="{{ post['preview_picture'] }}" class="card-img-top"
+                                 alt="{{ post['title'] }}"
+                                 style="max-height:200px;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post['title'] }}</h5>
+                            {% if post['preview_text'] is not empty %}
+                                <p class="card-text">{{ post['preview_text'] }}</p>
+                            {% endif %}
+
+                            <a href="/post/{{ post['slug'] }}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 {% endblock %}

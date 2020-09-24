@@ -1,5 +1,7 @@
 <?php
+
 use App\Controller\HomeController;
+use App\Controller\PostController;
 use App\Controller\TaskController;
 use App\Controller\UserController;
 use App\Helpers\Auth;
@@ -25,6 +27,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/task/{id:\d+}', [TaskController::class, 'show']);
     $r->addRoute('GET', '/task/{id:\d+}/edit', [TaskController::class, 'edit']);
     $r->addRoute('POST', '/task/{id:\d+}', [TaskController::class, 'update']);
+
+    $r->addRoute('GET', '/post/{slug}', [PostController::class, 'show']);
 });
 
 // Fetch method and URI from somewhere

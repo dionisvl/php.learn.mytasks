@@ -6,13 +6,19 @@ namespace App\Controller;
 use App\Helpers\Auth;
 use App\Helpers\Db;
 use App\Helpers\Validator;
+use App\Model\CategoryPost;
 use App\Model\Task;
 
 class HomeController extends BaseController
 {
-    public function index()
+    public function index(): void
     {
-        $this->print('/home/index.html.twig');
+        $categories = (new CategoryPostController())->getAll();
+        $posts = (new PostController())->getAll();
+        $this->print('/home/index.html.twig', [
+            'categories' => $categories,
+            'posts' => $posts
+        ]);
     }
 
 }
