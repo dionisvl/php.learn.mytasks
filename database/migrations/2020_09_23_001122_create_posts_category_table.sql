@@ -14,7 +14,8 @@ CREATE TABLE `post`
     `created_at`      DATETIME      DEFAULT CURRENT_TIMESTAMP,
     `updated_at`      DATETIME      DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-);
+) CHARACTER SET utf8
+  COLLATE utf8_unicode_ci;
 
 CREATE TABLE `category_post`
 (
@@ -29,4 +30,5 @@ CREATE TABLE `category_post`
     `created_at`      DATETIME      DEFAULT CURRENT_TIMESTAMP,
     `updated_at`      DATETIME      DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-);
+) CHARACTER SET utf8
+  COLLATE utf8_unicode_ci;
