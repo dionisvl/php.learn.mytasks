@@ -30,7 +30,7 @@ class Post extends BaseModel
         return $post;
     }
 
-    public function getAll(string $orderBy, string $orderDirection, int $perPage = 3, int $page = 1)
+    public function getAll(string $orderBy, string $orderDirection, int $perPage = 10000, int $page = 1)
     {
         $startRow = ($page - 1) * $perPage;
 

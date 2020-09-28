@@ -1,6 +1,16 @@
 {% extends "/home/layout.html.twig" %}
 
 {% block content %}
+    <style>
+        .card-img-top {
+            max-width: 320px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">{{ post['title'] }}</h1>
@@ -9,11 +19,10 @@
             {% endif %}
 
             {% if post['detail_picture'] is not empty %}
-                <img src="{{ post['detail_picture'] }}" class="card-img-top"
-                     alt="{{ post['title'] }}" style="max-height:400px;max-width:400px;">
+                <img src="{{ post['detail_picture'] }}" class="card-img-top" alt="{{ post['title'] }}">
             {% endif %}
             <hr class="my-4">
-            <p>{{ post['detail_text'] }}</p>
+            <p>{{ post['detail_text']|raw }}</p>
         </div>
     </div>
 {% endblock %}

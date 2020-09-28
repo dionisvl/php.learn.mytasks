@@ -1,6 +1,23 @@
 {% extends "/home/layout.html.twig" %}
 
 {% block content %}
+    <style>
+        .posts-container {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        .preview-post img {
+            width: auto;
+            max-height: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+        }
+    </style>
+
     <div class="col-md-12">
         {% if categories is empty %}
             <h3>Категорий не обнаружено</h3>
@@ -22,21 +39,19 @@
             <h3>Статей не обнаружено</h3>
         {% else %}
             <h2>Список статей:</h2>
-            <div style="display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;">
+            <div class="posts-container">
                 {% for post in posts %}
                     <div class="card" style="width: 18rem;">
                         {% if post['preview_picture'] is not empty %}
-                            <img src="{{ post['preview_picture'] }}" class="card-img-top"
-                                 alt="{{ post['title'] }}"
-                                 style="max-height:200px;">
+
                         {% endif %}
-                        <div class="card-body">
+                        <div class="card-body preview-post">
                             <h5 class="card-title">{{ post['title'] }}</h5>
                             {% if post['preview_text'] is not empty %}
                                 <p class="card-text">{{ post['preview_text'] }}</p>
                             {% endif %}
+
+                            <img src="{{ post['preview_picture'] }}" class="card-img-top" alt="{{ post['title'] }}">
 
                             <a href="/post/{{ post['slug'] }}" class="btn btn-primary">Подробнее</a>
                         </div>
