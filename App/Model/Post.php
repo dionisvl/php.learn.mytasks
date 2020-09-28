@@ -52,4 +52,25 @@ OFFSET $startRow";
         $row = $result->fetch_row();
         return $row[0];
     }
+
+    /**
+     * Get all elements by their category ID
+     * @param string $categoryId
+     * @return array|mixed
+     */
+    public static function getByCategoryId(string $categoryId)
+    {
+        $query = "SELECT * FROM post WHERE category_id=?";
+
+        $mysqli = Db::getLink();
+
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param('i', $categoryId);
+        $stmt->execute();
+        $posts = $stmt->get_result()->fetch_all(MYSQLI_ASSOC) ?? [];
+        $stmt->fetch();
+        $stmt->close();
+
+        return $posts;
+    }
 }

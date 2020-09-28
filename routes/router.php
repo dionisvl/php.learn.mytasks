@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\CategoryPostController;
 use App\Controller\HomeController;
 use App\Controller\PostController;
 use App\Controller\TaskController;
@@ -29,6 +30,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/task/{id:\d+}', [TaskController::class, 'update']);
 
     $r->addRoute('GET', '/post/{slug}', [PostController::class, 'show']);
+
+    $r->addRoute('GET', '/category-post/{slug}', [CategoryPostController::class, 'show']);
 });
 
 // Fetch method and URI from somewhere
@@ -46,12 +49,10 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         echo 'error: page not found (404)';
         die();
-        break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
         echo 'error: method not allowed';
         die();
-        break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];

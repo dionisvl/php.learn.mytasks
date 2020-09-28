@@ -5,6 +5,9 @@
     "ext-mbstring": "*",
     "twig/twig": "^3.0"
   },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",

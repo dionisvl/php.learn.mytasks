@@ -21,6 +21,9 @@ function dump($var)
 
 function dd($var)
 {
+    if (empty ($var)) {
+        die('variable is empty');
+    }
     echo '<pre>';
     print_r($var);
     echo '</pre>';
@@ -39,9 +42,12 @@ function handleController(string $controller, string $method, ?array $vars)
     $object->{$method}(...$values);
 }
 
-function isAuth(){
+function isAuth()
+{
     return Auth::isAuth();
 }
-function isAdmin(){
+
+function isAdmin()
+{
     return Auth::isAdmin();
 }

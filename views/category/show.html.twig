@@ -1,0 +1,37 @@
+{% extends "/home/layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-12">
+        <span>тема: </span>
+        <h1>{{ category['title'] }}</h1>
+        {% if category['detail_picture'] is not empty %}
+            <img src="{{ category['detail_picture'] }}" class="card-img-top" alt="{{ category['detail_picture'] }}">
+        {% endif %}
+
+        {% if category['detail_text'] is not empty %}
+            <div>{{ category['detail_text'] }}</div>
+        {% endif %}
+
+        {% if posts is empty %}
+            <h3>Статей не обнаружено</h3>
+        {% else %}
+            <h3>Список статей:</h3>
+            <div class="posts-container">
+                {% for post in posts %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body preview-post">
+                            <h5 class="card-title">{{ post['title'] }}</h5>
+                            {% if post['preview_text'] is not empty %}
+                                <p class="card-text">{{ post['preview_text'] }}</p>
+                            {% endif %}
+                            {% if post['preview_picture'] is not empty %}
+                                <img src="{{ post['preview_picture'] }}" class="card-img-top" alt="{{ post['title'] }}">
+                            {% endif %}
+                            <a href="/post/{{ post['slug'] }}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

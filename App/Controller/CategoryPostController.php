@@ -3,12 +3,8 @@
 namespace App\Controller;
 
 
-use App\Helpers\Auth;
-use App\Helpers\Db;
-use App\Helpers\Validator;
 use App\Model\CategoryPost;
 use App\Model\Post;
-use App\Model\Task;
 
 class CategoryPostController extends BaseController
 {
@@ -17,17 +13,19 @@ class CategoryPostController extends BaseController
         $orderBy = 'title';
         $orderDirection = 'ASC';
 
-        $category = new CategoryPost;
+        $category = new CategoryPost();
 
         return $category->getAll($orderBy, $orderDirection);
     }
 
-    public function show(int $id): void
+    public function show(string $slug): void
     {
-        $category = CategoryPost::getById($id);
-        $this->print('/post/show.html.twig', [
+        $category = CategoryPost::getBySlug($slug);
+        $elements = Post::getByCategoryId($category['id']);
+
+        $this->print('/category/show.html.twig', [
             'category' => $category,
-            'header' => (string)$category['title'],
+            'posts' => $elements,
         ]);
     }
 }

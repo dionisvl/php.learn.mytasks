@@ -26,11 +26,11 @@
             {% for category in categories %}
                 <div>
                     <span>
-                        <a href="/category/{{ category['slug'] }}">
+                        <a href="/category-post/{{ category['slug'] }}">
                             <i class="fa fa-eye" aria-hidden="true"></i>
+                        {{ category['title'] }}
                         </a>
                     </span>
-                    {{ category['title'] }}
                 </div>
             {% endfor %}
         {% endif %}

@@ -30,6 +30,22 @@ OFFSET $startRow";
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
+    public static function getBySlug(string $slug)
+    {
+        $query = "SELECT * FROM category_post WHERE slug=?";
+
+        $mysqli = Db::getLink();
+
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param('s', $slug);
+        $stmt->execute();
+        $category = $stmt->get_result()->fetch_assoc();
+        $stmt->fetch();
+        $stmt->close();
+
+        return $category;
+    }
+
     public function getCount(): int
     {
         $result = $this->link->query("SELECT COUNT(*) FROM `category_post`");
