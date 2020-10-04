@@ -33,8 +33,10 @@ class PostController extends BaseController
     public function show(string $slug): void
     {
         $post = Post::getBySlug($slug);
-        $this->print('/post/show.html.twig', [
+        $posts = Post::getByCategoryId($post['category_id']);
+        $this->print('/post_ghostwind/show.html.twig', [
             'post' => $post,
+            'posts' => $posts,
             'header' => (string)$post['title'],
         ]);
     }

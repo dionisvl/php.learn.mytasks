@@ -15,7 +15,7 @@ class HomeController extends BaseController
     {
         $categories = (new CategoryPostController())->getAll();
         $posts = (new PostController())->getAll();
-        $this->print('/home/index.html.twig', [
+        $this->print('/post_ghostwind/index.html.twig', [
             'categories' => $categories,
             'posts' => $posts
         ]);
