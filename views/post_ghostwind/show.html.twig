@@ -99,13 +99,18 @@
 <!--Title-->
 <div class="text-center pt-16 md:pt-32">
     <p class="text-sm md:text-base text-teal-500 font-bold">
-        {{ post['created_at'] | date("m/d/Y") }} <span class="text-gray-900">/</span> Статья </p>
+        {{ post['created_at'] | date("Y-m-d") }} <span class="text-gray-900">/</span> Статья </p>
     <h1 class="font-bold break-normal text-3xl md:text-5xl">{{ post['title'] }}</h1>
 </div>
 
 <!--image-->
-<div class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
-     style="background-image:url('https://source.unsplash.com/collection/1118905/'); height: 75vh;"></div>
+{% if post['preview_picture'] is not empty %}
+    <div class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
+         style="background-image:url('{{ post['preview_picture'] }}'); height: 75vh;"></div>
+{% else %}
+    <div class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
+         style="background-image:url('https://source.unsplash.com/collection/1118905/'); height: 75vh;"></div>
+{% endif %}
 
 <!--Container-->
 <div class="container max-w-5xl mx-auto -mt-32">
@@ -116,7 +121,7 @@
              style="font-family:Georgia,serif;">
 
             <!--Post Content-->
-            {{ post['detail_text'] }}
+            {{ post['detail_text']|raw }}
             <!--/ Post Content-->
 
         </div>
@@ -145,7 +150,8 @@
 
         <!--Author-->
         <div class="flex w-full items-center font-sans p-8 md:p-24">
-            <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
+            <img class="w-10 h-10 rounded-full mr-4" src="https://source.unsplash.com/collection/avatar/50x50"
+                 alt="Avatar of Author">
             <div class="flex-1">
                 <p class="text-base font-bold text-base md:text-xl leading-none">Ghostwind CSS</p>
                 <p class="text-gray-600 text-xs md:text-base">Tailwind CSS version of Ghost's Casper theme by <a

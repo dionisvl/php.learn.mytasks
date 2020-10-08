@@ -40,4 +40,9 @@ class PostController extends BaseController
             'header' => (string)$post['title'],
         ]);
     }
+
+    public function create(): void
+    {
+        $this->print('/post_ghostwind/create.html.twig', []);
+    }
 }

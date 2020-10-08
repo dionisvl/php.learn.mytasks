@@ -29,6 +29,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/task/{id:\d+}/edit', [TaskController::class, 'edit']);
     $r->addRoute('POST', '/task/{id:\d+}', [TaskController::class, 'update']);
 
+    $r->addRoute('GET', '/post/create', [PostController::class, 'create']);
+    $r->addRoute('POST', '/post/create', [PostController::class, 'store']);
     $r->addRoute('GET', '/post/{slug}', [PostController::class, 'show']);
 
     $r->addRoute('GET', '/category-post/{slug}', [CategoryPostController::class, 'show']);
